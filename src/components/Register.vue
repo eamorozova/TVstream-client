@@ -6,7 +6,7 @@
       <v-card-text>
         <v-text-field type="name"
                       name="name"
-                      v-mode="name"
+                      v-model="name"
                       label="имя"
                       color="#7A6054"
                       maxlength="32"
@@ -53,7 +53,7 @@
 <script>
 import AuthenticationService from '../services/AuthenticationService';
 
-const namePattern = /^[[а-яА-ЯёЁa-zA-Z]{2,32}$/
+const namePattern = /^[а-яА-ЯёЁa-zA-Z]{2,32}$/
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const passwordPattern = /^[a-zA-Z0-9]{6,16}$/
 
@@ -65,7 +65,6 @@ export default {
       name: '',
       error: null,
       alert: false,
-      disabled: true,
       nameRules: name => {
         return name.length === 0 ||
             namePattern.test(name) ||
