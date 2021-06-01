@@ -4,21 +4,28 @@
       <v-card-title>Регистрация</v-card-title>
       <v-card-subtitle>в сервисе просмотра расписания ТВ-передач</v-card-subtitle>
       <v-card-text>
+        <v-text-field type="name"
+                      name="name"
+                      v-mode="name"
+                      label="имя"
+                      color="#7A6054"
+                      maxlength="32"
+                      counter
+                      :rules="[nameRules]"/>
         <v-text-field type="email"
                       name="email"
                       v-model="email"
-                      class="pa-0 ma-0"
-                      color="#7A6054"
                       label="электронная почта"
-                      :rules="[emailRules]"
-        />
-        <v-text-field color="#7A6054"
-            type="password"
-            name="password"
-            maxlength="16"
-            v-model="password"
-            label="пароль"
-            :rules="[passwordRules]"/>
+                      color="#7A6054"
+                      :rules="[emailRules]"/>
+        <v-text-field type="password"
+                      name="password"
+                      v-model="password"
+                      label="пароль"
+                      color="#7A6054"
+                      maxlength="16"
+                      counter
+                      :rules="[passwordRules]"/>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -46,28 +53,42 @@
 <script>
 import AuthenticationService from '../services/AuthenticationService';
 
-const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const namePattern = /^[[а-яА-ЯёЁa-zA-Z]{2,32}$/
+const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const passwordPattern = /^[a-zA-Z0-9]{6,16}$/
 
 export default {
   data() {
     return {
       email: '',
       password: '',
+      name: '',
       error: null,
       alert: false,
       disabled: true,
-      emailRules: value => {
-        return value.length === 0 || pattern.test(value) || 'Invalid e-mail';
+      nameRules: name => {
+        return name.length === 0 ||
+            namePattern.test(name) ||
+            'Некорректное имя'
       },
-      passwordRules: value => {
-        return value.length === 0 || (value.length >= 6 && value.length <= 16) || 'Incorrect password';
+      emailRules: email => {
+        return email.length === 0 ||
+               emailPattern.test(email) ||
+               'Некорректная форма записи электронной почты';
       },
+      passwordRules: password => {
+        return password.length === 0 ||
+               passwordPattern.test(password) ||
+               'Не менее шести символов, допускаются только буквы латинского алфавита верхнего и нижнего регистра и цифры';
+      }
     };
   },
   computed: {
     formIsValid() {
       return (
-        pattern.test(this.email)
+        namePattern.test(this.name) &&
+        emailPattern.test(this.email) &&
+        passwordPattern.test(this.password)
       )
     },
   },
@@ -90,5 +111,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
