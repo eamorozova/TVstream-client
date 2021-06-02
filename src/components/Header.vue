@@ -1,26 +1,20 @@
 <template>
   <div class="header">
-    <nav>
-      <v-app-bar color="blue-grey darken-1" dark>
-        <v-app-bar-nav-icon @click="goHome()">
-          <v-icon color="white">mdi-television</v-icon>
-        </v-app-bar-nav-icon>
-        <v-app-bar-title>Расписание ТВ передач</v-app-bar-title>
-        <v-spacer></v-spacer>
-        <div>
-          <router-link :to="{ name: 'login' }">
-            <v-btn outlined>
-              Войти
-            </v-btn>
-          </router-link>
-          <router-link :to="{ name: 'register' }">
-            <v-btn outlined class="ml-2">
-              Зарегистрироваться
-            </v-btn>
-          </router-link>
-        </div>
-      </v-app-bar>
-    </nav>
+    <v-app-bar color="blue-grey darken-1" dark>
+      <v-app-bar-nav-icon v-on:click="goTo('/')">
+        <v-icon color="white">mdi-television</v-icon>
+      </v-app-bar-nav-icon>
+      <span class="text-h6" @click="goTo('/')">Расписание ТВ передач</span>
+      <v-spacer></v-spacer>
+      <div>
+        <v-btn outlined @click="goTo('/login')">
+          Войти
+        </v-btn>
+        <v-btn outlined class="ml-2" @click="goTo('/register')">
+          Зарегистрироваться
+        </v-btn>
+      </div>
+    </v-app-bar>
   </div>
 </template>
 
@@ -28,8 +22,8 @@
 export default {
   name: 'Header',
   methods: {
-    goHome() {
-      this.$router.push('/');
+    goTo(page) {
+      this.$router.push(page);
     },
   },
 };
