@@ -58,10 +58,11 @@
     <v-alert
       v-model="alert"
       type="error"
+      elevation="6"
       dismissible
       rounded
       class="mx-auto mt-8"
-      max-width="300px"
+      max-width="450px"
     >
       <div v-html="error" />
     </v-alert>
@@ -84,11 +85,13 @@ export default {
       error: null,
       alert: false,
       nameRules: name => {
+        this.alert = false;
         return (
           name.length === 0 || namePattern.test(name) || 'Некорректное имя'
         );
       },
       emailRules: email => {
+        this.alert = false;
         return (
           email.length === 0 ||
           emailPattern.test(email) ||
@@ -96,6 +99,7 @@ export default {
         );
       },
       passwordRules: password => {
+        this.alert = false;
         return (
           password.length === 0 ||
           passwordPattern.test(password) ||
@@ -115,6 +119,7 @@ export default {
   },
   methods: {
     async register() {
+      this.alert = false;
       try {
         const response = await AuthenticationService.register({
           email: this.email,
@@ -123,6 +128,9 @@ export default {
         });
         await this.$store.dispatch('setToken', response.data.token);
         await this.$store.dispatch('setUser', response.data.user);
+        this.name = '';
+        this.email = '';
+        this.password = '';
       } catch (error) {
         this.error = error.response.data.error;
         this.alert = true;

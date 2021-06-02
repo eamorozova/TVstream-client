@@ -4,6 +4,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import Channels from '../components/Channels';
 import Favorites from '../components/Favorites';
+import Header from "@/components/Header";
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register,
+    },
+    {
+      path: '/header',
+      name: 'header',
+      component: Header,
     },
   ],
 });

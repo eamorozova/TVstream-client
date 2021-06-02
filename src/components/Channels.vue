@@ -14,8 +14,7 @@
   </div>
 </template>
 
-<script>
-import Channel from './ChannelItem';
+<script>import Channel from './ChannelItem';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
