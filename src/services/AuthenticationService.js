@@ -7,10 +7,4 @@ export default {
   login(data) {
     return Api().post('login', data);
   },
-  getChannels() {
-    return Api().get('channels');
-  },
-  getChannel(id) {
-    return Api().get(`channels/${id}`);
-  },
 };

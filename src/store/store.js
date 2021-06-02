@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import AuthenticationService from '../services/AuthenticationService';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   strict: true,
+  plugins: [createPersistedState()],
   state: {
     channels: [],
     favorites: [],
@@ -14,10 +15,7 @@ export default new Vuex.Store({
     isLoggedIn: false,
   },
   mutations: {
-    SET_CHANNELS_TO_STATE: (state, channels) => {
-      state.channels = channels;
-    },
-    SET_LIKE: (state, channel) => {
+    setLike(state, channel) {
       const exist = state.favorites.some(item => item.id === channel.id);
       if (!exist) {
         state.favorites.push(channel);
@@ -35,19 +33,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    GET_CHANNELS({ commit }) {
-      AuthenticationService.getChannels()
-        .then(channels => {
-          commit('SET_CHANNELS_TO_STATE', channels.data);
-          return channels;
-        })
-        .catch(error => {
-          console.log(error);
-          return error;
-        });
-    },
     LIKE({ commit }, channel) {
-      commit('SET_LIKE', channel);
+      commit('setLike', channel);
     },
     DELETE_FAVORITE({ commit }, index) {
       commit('REMOVE_FAVORITE', index);

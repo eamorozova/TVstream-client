@@ -4,7 +4,9 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import Channels from '../components/Channels';
 import Favorites from '../components/Favorites';
-import Header from "@/components/Header";
+import Header from '../components/Header';
+import CreateChannel from '../components/CreateChannel';
+import EditChannel from '../components/EditChannel';
 
 Vue.use(Router);
 
@@ -36,6 +38,21 @@ export default new Router({
       path: '/header',
       name: 'header',
       component: Header,
+    },
+    {
+      path: '/create',
+      name: 'createChannel',
+      component: CreateChannel,
+    },
+    // {
+    //   path: '/channels/:channelId',
+    //   name: 'channel',
+    //   component: ViewChannel,
+    // },
+    {
+      path: '/channels/:channelId/edit',
+      name: 'editChannel',
+      component: EditChannel,
     },
   ],
 });
