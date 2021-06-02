@@ -1,10 +1,13 @@
 <template>
   <div>
-    <img :src="favoriteItemData.image" alt="img" />
-    <div>
-      <p>{{ favoriteItemData.title }}</p>
-    </div>
-    <button @click="deleteFavorite">DISLIKE</button>
+    <v-list-item>
+      <v-list-item-content>{{ favoriteItemData.title }}</v-list-item-content>
+      <v-list-item-action>
+        <v-btn icon color="red" @click="deleteFavorite">
+          <v-icon>mdi-star-off-outline</v-icon>
+        </v-btn>
+      </v-list-item-action>
+    </v-list-item>
   </div>
 </template>
 

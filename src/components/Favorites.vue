@@ -1,15 +1,19 @@
 <template>
   <div>
-    <p v-if="!favoritesData.length">No favorites...</p>
-    <router-link :to="{ name: 'channels' }">
-      <div>HOME</div>
-    </router-link>
-    <favorite-item
-      v-for="(item, index) in favoritesData"
-      :key="item.id"
-      :favorite-item-data="item"
-      @deleteFavorite="deleteFavorite(index)"
-    />
+    <v-list subheader max-width="500px" class="ma-auto">
+      <v-subheader>Избранный каналы</v-subheader>
+      <div v-for="(item, index) in favoritesData" :key="item.id">
+        <favorite-item
+          :favorite-item-data="item"
+          @deleteFavorite="deleteFavorite(index)"
+        ></favorite-item>
+        <v-divider
+          v-if="index < favoritesData.length - 1"
+          :key="index"
+          class="mx-5"
+        ></v-divider>
+      </div>
+    </v-list>
   </div>
 </template>
 
