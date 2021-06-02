@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-list subheader max-width="500px" class="ma-auto">
-      <v-subheader>Избранный каналы</v-subheader>
+      <v-subheader>Избранные каналы</v-subheader>
       <div v-for="(item, index) in favoritesData" :key="item.id">
         <favorite-item
           :favorite-item-data="item"

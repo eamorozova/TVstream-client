@@ -1,11 +1,11 @@
 import Api from './Api';
 
 export default {
-  getChannels() {
-    return Api().get('channels');
-  },
   getChannel(id) {
     return Api().get(`channels/${id}`);
+  },
+  getChannels() {
+    return Api().get('channels');
   },
   post(channel) {
     return Api().post('channels', channel);

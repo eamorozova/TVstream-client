@@ -63,7 +63,7 @@ export default {
       try {
         await ChannelsService.put(this.channel, channelId);
         await this.$router.push({
-          name: 'channel',
+          name: 'channels',
           params: {
             channelId: channelId,
           },
@@ -76,7 +76,7 @@ export default {
   async mounted() {
     try {
       const channelId = this.$store.state.route.params.channelId;
-      this.channel = (await ChannelsService.show(channelId)).data;
+      this.channel = (await ChannelsService.getChannel(channelId)).data;
     } catch (err) {
       console.log(err);
     }
