@@ -1,6 +1,6 @@
 <template>
   <div class="tv-channel">
-    <!--    <img :src="require('../assets/images/' + channelData.image)" alt="img" />-->
+    <img :src="channelData.image" alt="img" />
     <br />
     <div class="label">
       <button class="btn" @click="likeChannel">❤</button>
