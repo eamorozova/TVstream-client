@@ -1,9 +1,6 @@
 <template>
   <div>
-    <!--    <img-->
-    <!--        :src="require('../assets/images/' + favoriteItemData.image)"-->
-    <!--        alt="img"-->
-    <!--    />-->
+    <img :src="favoriteItemData.image" alt="img" />
     <div>
       <p>{{ favoriteItemData.title }}</p>
     </div>
