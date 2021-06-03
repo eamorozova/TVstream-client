@@ -101,6 +101,7 @@ export default {
         });
         await this.$store.dispatch('setToken', response.data.token);
         await this.$store.dispatch('setUser', response.data.user);
+        await this.$router.push('/');
       } catch (error) {
         this.error = error.response.data.error;
         this.alert = true;

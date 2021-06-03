@@ -7,10 +7,10 @@
       <span class="text-h6" @click="goTo('/')">Расписание ТВ передач</span>
       <v-spacer></v-spacer>
       <div>
-        <v-btn outlined @click="goTo('/login')">
+        <v-btn v-if="!$store.state.isLoggedIn" outlined @click="goTo('/login')">
           Войти
         </v-btn>
-        <v-btn outlined class="ml-2" @click="goTo('/register')">
+        <v-btn v-if="!$store.state.isLoggedIn" outlined class="ml-2" @click="goTo('/register')">
           Зарегистрироваться
         </v-btn>
       </div>

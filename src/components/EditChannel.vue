@@ -57,11 +57,7 @@ export default {
   name: 'EditChannel',
   data() {
     return {
-      channel: {
-        title: null,
-        description: null,
-        image: null,
-      },
+      channel: {},
       error: null,
     };
   },

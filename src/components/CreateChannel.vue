@@ -13,6 +13,9 @@
           label="название"
           v-model="channel.title"
           color="#7A6054"
+          counter
+          maxlength="16"
+          :rules="[titleRules]"
         />
         <v-textarea
           label="описание"
@@ -55,6 +58,8 @@
 <script>
 import ChannelsService from '../services/ChannelsService';
 
+let titlePattern = /^[а-яА-ЯёЁa-zA-Z][а-яА-ЯёЁa-zA-Z ]{1,15}$/;
+
 export default {
   name: 'CreateChannel',
   data() {
@@ -65,6 +70,12 @@ export default {
         image: null,
       },
       error: null,
+      titleRules: title => {
+        return (
+          titlePattern.test(title) ||
+          'Только буквы, цифры и пробелы, от двух до тридцати двух символов'
+        );
+      },
     };
   },
   methods: {

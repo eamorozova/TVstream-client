@@ -4,9 +4,7 @@
       <v-img
         :src="channelData.image"
         height="200px"
-        class="white--text align-end font-weight-black text-uppercase"
-      >
-      </v-img>
+      />
       <v-card-title>{{ channelData.title }}</v-card-title>
       <v-card-text>{{ channelData.description }} </v-card-text>
       <v-card-actions>
@@ -15,6 +13,7 @@
           outlined
           color="blue-grey darkned-1"
           class="ml-2 mb-2 px-4"
+          v-on:click="viewChannel(channelData.id)"
           >Расписание</v-btn
         >
         <!--v-btn
@@ -62,6 +61,9 @@ export default {
   methods: {
     likeChannel() {
       this.$emit('likeChannel', this.channelData);
+    },
+    viewChannel(id) {
+      this.$router.push('/channels/' + String(id));
     },
   },
 };

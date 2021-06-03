@@ -131,6 +131,7 @@ export default {
         this.name = '';
         this.email = '';
         this.password = '';
+        await this.$router.push('/login');
       } catch (error) {
         this.error = error.response.data.error;
         this.alert = true;
