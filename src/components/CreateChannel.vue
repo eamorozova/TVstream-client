@@ -10,42 +10,44 @@
       <v-card-text>
         <v-text-field
           type="text"
-          name="title"
-          v-model="channel.title"
           label="название"
+          v-model="channel.title"
           color="#7A6054"
         />
-        <v-text-field
-          type="text"
-          name="description"
-          v-model="channel.description"
+        <v-textarea
           label="описание"
-          color="#7A6054"
-        />
+          type="text"
+          v-model="channel.description"
+          color="#7a6054"
+          auto-grow
+          counter
+          rows="3"
+          maxlength="256"
+        ></v-textarea>
         <v-text-field
           type="text"
-          name="image"
           v-model="channel.image"
           label="ссылка на логотип"
           color="#7A6054"
+          append-outer-icon="mdi-image-plus"
+          @click:append-outer="addRandomImage"
         />
       </v-card-text>
-      <v-btn
-        class="font-weight-bold mb-2 mr-1 white--text"
-        color="blue-grey darken-1"
-        right
-        @click="addRandomImage"
-        elevation="2"
-        >рандомное изображение</v-btn
-      >
-      <v-btn
-        class="font-weight-bold mb-2 mr-1 white--text"
-        color="blue-grey darken-1"
-        right
-        @click="create"
-        elevation="2"
-        >добавить</v-btn
-      >
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          class="font-weight-bold mb-2 mr-1 white--text px-2"
+          color="blue-grey darken-1"
+          @click="create"
+          right
+          elevation="2"
+          :disabled="
+            !(this.channel.title !== null && this.channel.title.length > 0)
+          "
+        >
+          Создать
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -67,14 +69,17 @@ export default {
   },
   methods: {
     addRandomImage() {
-      this.channel.image = 'https://picsum.photos/200/300';
+      let imageSeed = Math.floor(Math.random() * 9999);
+      this.channel.image =
+        'https://picsum.photos/seed/' + String(imageSeed) + '/450/200';
     },
     async create() {
+      if (this.channel.image === null || this.channel.image.length === 0) {
+        this.addRandomImage();
+      }
       try {
         await ChannelsService.post(this.channel);
-        await this.$router.push({
-          name: 'channel',
-        });
+        await this.$router.push('/');
       } catch (err) {
         console.log(err);
       }

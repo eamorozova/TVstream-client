@@ -6,8 +6,8 @@
         height="200px"
         class="white--text align-end font-weight-black text-uppercase"
       >
-        <v-card-title>{{ channelData.title }}</v-card-title>
       </v-img>
+      <v-card-title>{{ channelData.title }}</v-card-title>
       <v-card-text>{{ channelData.description }} </v-card-text>
       <v-card-actions>
         <v-btn
@@ -17,7 +17,7 @@
           class="ml-2 mb-2 px-4"
           >Расписание</v-btn
         >
-        <v-btn
+        <!--v-btn
           rounded
           outlined
           color="blue-grey darkned-1"
@@ -29,7 +29,7 @@
             },
           }"
           >Изменить</v-btn
-        >
+        -->
         <v-spacer></v-spacer>
         <v-btn
           icon
