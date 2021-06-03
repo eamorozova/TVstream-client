@@ -33,9 +33,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['DELETE_FAVORITE']),
+    ...mapActions(['removeFavorite']),
     deleteFavorite(index) {
-      this.DELETE_FAVORITE(index);
+      this.removeFavorite(index);
     },
   },
 };

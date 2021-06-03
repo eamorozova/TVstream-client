@@ -21,7 +21,7 @@ export default new Vuex.Store({
         state.favorites.push(channel);
       }
     },
-    REMOVE_FAVORITE: (state, index) => {
+    removeFavorite(state, index) {
       state.favorites.splice(index, 1);
     },
     setToken(state, token) {
@@ -33,11 +33,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    LIKE({ commit }, channel) {
+    setLike({ commit }, channel) {
       commit('setLike', channel);
     },
-    DELETE_FAVORITE({ commit }, index) {
-      commit('REMOVE_FAVORITE', index);
+    removeFavorite({ commit }, index) {
+      commit('removeFavorite', index);
     },
     setToken({ commit }, token) {
       commit('setToken', token);

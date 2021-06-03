@@ -46,9 +46,9 @@ export default {
     ...mapGetters(['FAVORITES']),
   },
   methods: {
-    ...mapActions(['LIKE']),
+    ...mapActions(['setLike']),
     likeChannel(data) {
-      this.LIKE(data);
+      this.setLike(data);
     },
   },
   async mounted() {
