@@ -38,6 +38,14 @@
         elevation="2"
         >сохранить</v-btn
       >
+      <v-btn
+        class="font-weight-bold mb-2 mr-1 white--text"
+        color="blue-grey darken-1"
+        right
+        @click="deleteChannel"
+        elevation="2"
+        >удалить</v-btn
+      >
     </v-card>
   </div>
 </template>
@@ -62,6 +70,20 @@ export default {
       const channelId = this.$store.state.route.params.channelId;
       try {
         await ChannelsService.put(this.channel, channelId);
+        await this.$router.push({
+          name: 'channels',
+          params: {
+            channelId: channelId,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteChannel() {
+      const channelId = this.$store.state.route.params.channelId;
+      try {
+        await ChannelsService.delete(channelId);
         await this.$router.push({
           name: 'channels',
           params: {

@@ -1,6 +1,9 @@
 import Api from './Api';
 
 export default {
+  delete(id) {
+    return Api().delete(`channels/${id}`);
+  },
   getChannel(id) {
     return Api().get(`channels/${id}`);
   },
