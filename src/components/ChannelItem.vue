@@ -14,21 +14,7 @@
           color="blue-grey darkned-1"
           class="ml-2 mb-2 px-4"
           v-on:click="viewChannel(channelData.id)"
-          >Расписание</v-btn
-        >
-        <!--v-btn
-          rounded
-          outlined
-          color="blue-grey darkned-1"
-          class="ml-2 mb-2 px-4"
-          :to="{
-            name: 'editChannel',
-            params: {
-              channelId: channelData.id,
-            },
-          }"
-          >Изменить</v-btn
-        -->
+          >Расписание</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           icon

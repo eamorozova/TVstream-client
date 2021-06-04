@@ -15,7 +15,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn @click="beginEditing" outlined>
+                <v-btn @click="beginEditing" outlined class="mb-1">
                   <v-icon left>mdi-circle-edit-outline</v-icon>
                   Редактировать
                 </v-btn>
@@ -68,22 +68,15 @@
                 </v-btn>
               </v-card-actions>
             </div>
-            <v-divider class="mx-3 mb-3" />
+            <div class="px-3">
+              <v-divider />
+              <v-container v-for="program in programs" :key="program.id">
+                <program :program-data="program"> </program>
+              </v-container>
+            </div>
           </v-card>
         </v-col>
       </v-row>
-      <v-container>
-        <v-row>
-          <v-col
-            v-for="program in programs"
-            :key="program.id"
-            class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
-          >
-            <program :program-data="program">
-            </program>
-          </v-col>
-        </v-row>
-      </v-container>
     </v-container>
   </div>
 </template>
