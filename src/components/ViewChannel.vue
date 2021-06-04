@@ -72,12 +72,26 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-container>
+        <v-row>
+          <v-col
+            v-for="program in programs"
+            :key="program.id"
+            class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
+          >
+            <program :program-data="program">
+            </program>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-container>
   </div>
 </template>
 
 <script>
 import ChannelsService from '../services/ChannelsService';
+import ProgramsService from '../services/ProgramsService';
+import Program from './ProgramItem';
 
 let titlePattern = /^[а-яА-ЯёЁa-zA-Z][а-яА-ЯёЁa-zA-Z ]{1,15}$/;
 
@@ -85,6 +99,7 @@ export default {
   name: 'ViewChannel',
   data() {
     return {
+      programs: null,
       channel: {},
       error: null,
       editing: false,
@@ -99,10 +114,15 @@ export default {
       },
     };
   },
+  components: {
+    Program,
+  },
   async mounted() {
     try {
       const channelId = this.$store.state.route.params.channelId;
       this.channel = (await ChannelsService.getChannel(channelId)).data;
+      this.programs = (await ProgramsService.getPrograms(channelId)).data;
+      console.log(this.programs);
     } catch (err) {
       console.log(err);
     }
