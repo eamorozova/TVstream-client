@@ -58,7 +58,7 @@
 <script>
 import ChannelsService from '../services/ChannelsService';
 
-let titlePattern = /^[а-яА-ЯёЁa-zA-Z][а-яА-ЯёЁa-zA-Z ]{1,15}$/;
+let titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,15}$/;
 
 export default {
   name: 'CreateChannel',
