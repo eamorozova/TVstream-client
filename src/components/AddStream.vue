@@ -1,26 +1,23 @@
 <template>
   <div class="addStream">
-    <v-card
-      class="mx-auto mt-16"
-      max-width="450px"
-      color="grey lighten-5"
-      elevation="6"
-    >
-      <v-card-title>Добавление трвнсляции</v-card-title>
+    <v-card class="mx-auto mt-16" max-width="450px" elevation="6">
+      <v-card-title>Добавление трансляции</v-card-title>
       <v-card-text>
+        <v-autocomplete
+          color="#7a6054"
+          item-color="brown lighten-1"
+          label="Канал"
+          outlined
+          :items="channels"
+        />
 
-       <v-select
-            :chenels="chenels"
-            label="Канал трансляции"
-            outlined
-        ></v-select>
-
-        <v-select
-            :programs="programs"
-            label="Транслируемая телепердача"
-            outlined
-        ></v-select>
-
+        <v-autocomplete
+          color="#7a6054"
+          item-color="brown lighten-1"
+          label="Телепередача"
+          outlined
+          :items="programs"
+        />
         <v-menu
           v-model="menu2"
           :close-on-content-click="false"
@@ -35,26 +32,23 @@
               label="Дата трансляции"
               prepend-icon="mdi-calendar"
               readonly
+              color="#7a6054"
               v-bind="attrs"
               v-on="on"
             ></v-text-field>
           </template>
-         
-
-        
           <v-date-picker
             v-model="date"
             @input="menu2 = true"
-            :min=curentDate
+            :min="currentDate"
+            color="#7a6054"
           ></v-date-picker>
         </v-menu>
-        
-         <v-menu
+        <v-menu
           ref="menu"
           v-model="menu2"
           :close-on-content-click="false"
           :nudge-right="40"
-         
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -65,48 +59,52 @@
               label="Время трансляции"
               prepend-icon="mdi-clock-time-four-outline"
               readonly
+              color="#7a6054"
               v-bind="attrs"
               v-on="on"
             ></v-text-field>
           </template>
           <v-time-picker
-            
             v-model="time"
-            format='24hr'
+            format="24hr"
+            color="#7a6054"
             @click:minute="$refs.menu.save(time)"
           ></v-time-picker>
         </v-menu>
-        
-
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           class="font-weight-bold mb-2 mr-1 white--text"
           color="blue-grey darken-1"
-          :disabled="!formIsValid"
-          right
           elevation="2"
         >
-          <v-icon left>mdi-login-variant</v-icon>
+          <v-icon left>mdi-plus-circle</v-icon>
           Добавить
         </v-btn>
       </v-card-actions>
     </v-card>
-   
   </div>
 </template>
 
 <script>
+import ChannelsService from "@/services/ChannelsService";
 
-const today = new Date()
-const tomorrow = new Date(today)
-tomorrow.setDate(tomorrow.getDate() + 1)
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
 export default {
-    data: () =>({
-        curentDate: tomorrow.toISOString( ).substring(0,10)
-    })
-}
+  data: () => ({
+    channels: null,
+    currentDate: tomorrow.toISOString().substring(0, 10),
+  }),
+  async mounted() {
+    const response = (await ChannelsService.getChannels()).data;
+    response.forEach(channel => {
+      this.channels.push(channel.title);
+    });
+  },
+};
 </script>
 
-<style> </style>
+<style></style>

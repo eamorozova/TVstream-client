@@ -1,7 +1,7 @@
 <template>
   <div class="channel-list">
     <router-link :to="{ name: 'favorites' }">
-      <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2">
+      <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2" v-if="$store.state.isLoggedIn">
         <v-icon left>mdi-star</v-icon>
         Избранное
       </v-btn>
@@ -15,12 +15,11 @@
     <v-container>
       <v-row>
         <v-col
+          class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
           v-for="channel in channels"
           :key="channel.id"
-          class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
         >
-          <channel :channel-data="channel" @likeChannel="likeChannel">
-          </channel>
+          <channel :channel-data="channel" @likeChannel="likeChannel"/>
         </v-col>
       </v-row>
     </v-container>

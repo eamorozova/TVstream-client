@@ -1,54 +1,57 @@
 <template>
-  <div class="register">
+  <div id="register-form">
     <v-card
       class="mx-auto mt-16"
-      max-width="450px"
-      color="grey lighten-5"
       elevation="6"
+      id="register-form-card"
+      max-width="450px"
     >
       <v-card-title>Регистрация</v-card-title>
-      <v-card-subtitle
-        >в сервисе просмотра расписания ТВ-передач</v-card-subtitle
-      >
+      <v-card-subtitle>
+        в сервисе просмотра расписания ТВ-передач
+      </v-card-subtitle>
       <v-card-text>
         <v-text-field
-          type="name"
-          name="name"
-          v-model="name"
-          label="имя"
           color="#7A6054"
-          maxlength="32"
           counter
+          id="register-form-name-field"
+          label="имя"
+          maxlength="32"
+          name="name"
+          type="name"
+          v-model="name"
           :rules="[nameRules]"
         />
         <v-text-field
-          type="email"
-          name="email"
-          v-model="email"
-          label="электронная почта"
           color="#7A6054"
+          if="register-form-email-field"
+          label="электронная почта"
+          name="email"
+          type="email"
+          v-model="email"
           :rules="[emailRules]"
         />
         <v-text-field
-          type="password"
-          name="password"
-          v-model="password"
-          label="пароль"
           color="#7A6054"
-          maxlength="16"
           counter
+          id="register-form-password-field"
+          label="пароль"
+          maxlength="16"
+          name="password"
+          type="password"
+          v-model="password"
           :rules="[passwordRules]"
         />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          class="font-weight-bold mb-2 mr-1 white--text"
+          class="font-weight-bold white--text mr-1 mb-2"
           color="blue-grey darken-1"
-          :disabled="!formIsValid"
-          right
-          @click="register"
           elevation="2"
+          right
+          :disabled="!formIsValid"
+          @click="register"
         >
           <v-icon left>mdi-account-plus-outline</v-icon>
           Зарегистрироваться
@@ -56,13 +59,14 @@
       </v-card-actions>
     </v-card>
     <v-alert
-      v-model="alert"
-      type="error"
-      elevation="6"
-      dismissible
-      rounded
       class="mx-auto mt-8"
+      dismissible
+      elevation="6"
+      id="register-form-error-alert"
       max-width="450px"
+      rounded
+      type="error"
+      v-model="alert"
     >
       <div v-html="error" />
     </v-alert>
@@ -79,11 +83,11 @@ const passwordPattern = /^[a-zA-Z0-9]{6,16}$/;
 export default {
   data() {
     return {
+      name: '',
       email: '',
       password: '',
-      name: '',
-      error: null,
       alert: false,
+      error: null,
       nameRules: name => {
         this.alert = false;
         return (
@@ -121,17 +125,21 @@ export default {
     async register() {
       this.alert = false;
       try {
-        const response = await AuthenticationService.register({
+        await AuthenticationService.register({
           email: this.email,
           password: this.password,
           name: this.name,
+        });
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password,
         });
         await this.$store.dispatch('setToken', response.data.token);
         await this.$store.dispatch('setUser', response.data.user);
         this.name = '';
         this.email = '';
         this.password = '';
-        await this.$router.push('/login');
+        await this.$router.push('/');
       } catch (error) {
         this.error = error.response.data.error;
         this.alert = true;

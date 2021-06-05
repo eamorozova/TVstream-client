@@ -3,7 +3,6 @@
     <v-card
       class="mx-auto mt-16"
       max-width="450px"
-      color="grey lighten-5"
       elevation="6"
     >
       <v-card-title>Вход</v-card-title>
@@ -79,8 +78,7 @@ export default {
           'Некорректная форма записи электронной почты'
         );
       },
-      // eslint-disable-next-line no-unused-vars
-      passwordRules: password => {
+      passwordRules: () => {
         this.alert = false;
         return true;
       },

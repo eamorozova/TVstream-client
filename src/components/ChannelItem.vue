@@ -1,27 +1,25 @@
 <template>
   <div id="tv-channel">
     <v-card>
-      <v-img
-        :src="channelData.image"
-        height="200px"
-      />
+      <v-img height="200px" :src="channelData.image" />
       <v-card-title>{{ channelData.title }}</v-card-title>
       <v-card-text>{{ channelData.description }} </v-card-text>
       <v-card-actions>
         <v-btn
           rounded
           outlined
-          color="blue-grey darkned-1"
-          class="ml-2 mb-2 px-4"
+          color="blue-grey darkened-1"
+          class="px-4 ml-2 mb-2"
           v-on:click="viewChannel(channelData.id)"
-          >Расписание</v-btn>
+          >Расписание</v-btn
+        >
         <v-spacer></v-spacer>
         <v-btn
           icon
           outlined
           color="#7A6054"
-          @click="likeChannel"
           class="mr-2 mb-2"
+          @click="likeChannel"
         >
           <v-icon>mdi-star-outline</v-icon>
         </v-btn>

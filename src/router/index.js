@@ -2,8 +2,6 @@ import Router from 'vue-router';
 import Vue from 'vue';
 import Channels from '../components/Channels';
 import CreateChannel from '../components/CreateChannel';
-import EditChannel from '../components/EditChannel';
-import Header from '../components/Header';
 import Favorites from '../components/Favorites';
 import Login from '../components/Login';
 import Register from '../components/Register';
@@ -25,19 +23,9 @@ export default new Router({
       component: ViewChannel,
     },
     {
-      path: '/channels/:channelId/edit',
-      name: 'editChannel',
-      component: EditChannel,
-    },
-    {
       path: '/create',
       name: 'createChannel',
       component: CreateChannel,
-    },
-    {
-      path: '/header',
-      name: 'header',
-      component: Header,
     },
     {
       path: '/favorites',
