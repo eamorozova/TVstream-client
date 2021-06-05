@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-list-item>
-      <v-list-item-content>{{ favoriteItemData.title }}</v-list-item-content>
+      <v-list-item-content>{{
+        favoriteData.Channel.title
+      }}</v-list-item-content>
       <v-list-item-action>
         <v-btn icon color="red" @click="deleteFavorite">
           <v-icon>mdi-star-off-outline</v-icon>
@@ -12,10 +14,12 @@
 </template>
 
 <script>
+import FavoriteService from '../services/FavoriteService';
+
 export default {
   name: 'FavoriteItem',
   props: {
-    favoriteItemData: {
+    favoriteData: {
       type: Object,
       default() {
         return {};
@@ -24,11 +28,11 @@ export default {
   },
   methods: {
     deleteFavorite() {
-      this.$emit('deleteFavorite');
+      FavoriteService.delete(this.favoriteData.id);
     },
   },
   mounted() {
-    this.$set(this.favoriteItemData, 'isFavorite', true);
+    console.log(this.favoriteData.Channel);
   },
 };
 </script>

@@ -1,8 +1,6 @@
 <template>
   <div class="channel-list">
-    <router-link
-      :to="{ name: 'favorites', params: { favoritesData: FAVORITES } }"
-    >
+    <router-link :to="{ name: 'favorites' }">
       <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2">
         <v-icon left>mdi-star</v-icon>
         Избранное
@@ -32,7 +30,7 @@
 <script>
 import Channel from './ChannelItem';
 import ChannelsService from '../services/ChannelsService';
-import { mapActions, mapGetters } from 'vuex';
+import FavoriteService from '../services/FavoriteService';
 
 export default {
   data() {
@@ -42,13 +40,9 @@ export default {
   },
   name: 'Channels',
   components: { Channel },
-  computed: {
-    ...mapGetters(['FAVORITES']),
-  },
   methods: {
-    ...mapActions(['setLike']),
     likeChannel(data) {
-      this.setLike(data);
+      FavoriteService.post({ channelId: data.id });
     },
   },
   async mounted() {

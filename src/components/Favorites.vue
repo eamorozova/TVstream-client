@@ -1,29 +1,31 @@
 <template>
   <div>
-    <v-list subheader max-width="500px" class="ma-auto">
-      <v-subheader>Избранные каналы</v-subheader>
-      <div v-for="(item, index) in favoritesData" :key="item.id">
-        <favorite-item
-          :favorite-item-data="item"
-          @deleteFavorite="deleteFavorite(index)"
-        ></favorite-item>
-        <v-divider
-          v-if="index < favoritesData.length - 1"
-          :key="index"
-          class="mx-5"
-        ></v-divider>
-      </div>
-    </v-list>
+    <v-container>
+      <v-row>
+        <v-col
+          v-for="favorite in favorites"
+          :key="favorite.id"
+          class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
+        >
+          <favorite :favorite-data="favorite"> </favorite>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-import FavoriteItem from './FavoriteItem';
-import { mapActions } from 'vuex';
+import Favorite from './FavoriteItem';
+import FavoriteService from '../services/FavoriteService';
 
 export default {
   name: 'Favorites',
-  components: { FavoriteItem },
+  components: { Favorite },
+  data() {
+    return {
+      favorites: null,
+    };
+  },
   props: {
     favoritesData: {
       type: Array,
@@ -32,10 +34,13 @@ export default {
       },
     },
   },
+  async mounted() {
+    this.favorites = (await FavoriteService.get()).data;
+  },
   methods: {
-    ...mapActions(['removeFavorite']),
-    deleteFavorite(index) {
-      this.removeFavorite(index);
+    async deleteFavorite(index) {
+      FavoriteService.delete(index);
+      this.favorites = (await FavoriteService.get()).data;
     },
   },
 };
