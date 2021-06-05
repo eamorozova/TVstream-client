@@ -95,7 +95,7 @@ const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 export default {
   data: () => ({
-    channels: null,
+    channels: [],
     currentDate: tomorrow.toISOString().substring(0, 10),
   }),
   async mounted() {
