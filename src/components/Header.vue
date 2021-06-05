@@ -10,8 +10,21 @@
         <v-btn v-if="!$store.state.isLoggedIn" outlined @click="goTo('/login')">
           Войти
         </v-btn>
-        <v-btn v-if="!$store.state.isLoggedIn" outlined class="ml-2" @click="goTo('/register')">
+        <v-btn
+          v-if="!$store.state.isLoggedIn"
+          outlined
+          class="ml-2"
+          @click="goTo('/register')"
+        >
           Зарегистрироваться
+        </v-btn>
+        <v-btn
+          v-if="$store.state.isLoggedIn"
+          outlined
+          class="ml-2"
+          @click="logout"
+        >
+          Выйти
         </v-btn>
       </div>
     </v-app-bar>
@@ -24,6 +37,10 @@ export default {
   methods: {
     goTo(page) {
       this.$router.push(page);
+    },
+    logout() {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
     },
   },
 };
