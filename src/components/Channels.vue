@@ -1,11 +1,5 @@
 <template>
   <div class="channel-list">
-    <router-link :to="{ name: 'favorites' }">
-      <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2" v-if="$store.state.isLoggedIn">
-        <v-icon left>mdi-star</v-icon>
-        Избранное
-      </v-btn>
-    </router-link>
     <router-link :to="{ name: 'createChannel' }">
       <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2">
         Добавить канал

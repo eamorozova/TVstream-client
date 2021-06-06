@@ -20,6 +20,7 @@
           color="#7A6054"
           class="mr-2 mb-2"
           @click="likeChannel"
+          v-if="$store.state.isLoggedIn"
         >
           <v-icon>mdi-star-outline</v-icon>
         </v-btn>

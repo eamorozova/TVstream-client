@@ -24,7 +24,7 @@
         />
         <v-text-field
           color="#7A6054"
-          if="register-form-email-field"
+          id="register-form-email-field"
           label="электронная почта"
           name="email"
           type="email"

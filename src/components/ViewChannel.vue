@@ -10,9 +10,9 @@
               <v-card-title class="text-h4">
                 {{ channel.title }}
               </v-card-title>
-              <v-card-text>
+              <v-card-subtitle>
                 {{ channel.description }}
-              </v-card-text>
+              </v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
                 <v-btn @click="beginEditing" outlined class="mb-1">
@@ -60,10 +60,15 @@
                   удалить канал
                 </v-btn>
                 <v-spacer />
-                <v-btn outlined color="#7a6054" @click="save">
+                <v-btn
+                  outlined
+                  color="blue-grey darken-1"
+                  @click="save"
+                  :disabled="!formIsValid"
+                >
                   сохранить
                 </v-btn>
-                <v-btn class="mr-n3" outlined color="#7a6054" @click="cancel">
+                <v-btn class="mr-n3" outlined color="blue-grey darken-1" @click="cancel">
                   отмена
                 </v-btn>
               </v-card-actions>
@@ -86,7 +91,7 @@ import ChannelsService from '../services/ChannelsService';
 import ProgramsService from '../services/ProgramsService';
 import Program from './ProgramItem';
 
-let titlePattern = /^[а-яА-ЯёЁa-zA-Z][а-яА-ЯёЁa-zA-Z ]{1,15}$/;
+let titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,15}$/;
 
 export default {
   name: 'ViewChannel',
@@ -109,6 +114,11 @@ export default {
   },
   components: {
     Program,
+  },
+  computed: {
+    formIsValid() {
+      return titlePattern.test(this.channel.title);
+    },
   },
   async mounted() {
     try {

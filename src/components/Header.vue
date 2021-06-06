@@ -7,33 +7,54 @@
       <span class="text-h6" @click="goTo('/')">Расписание ТВ передач</span>
       <v-spacer></v-spacer>
       <div>
-        <v-btn v-if="!$store.state.isLoggedIn" outlined @click="goTo('/login')">
-          Войти
-        </v-btn>
         <v-btn
           v-if="!$store.state.isLoggedIn"
           outlined
-          class="ml-2"
           @click="goTo('/register')"
         >
+          <v-icon left>mdi-account-plus-outline</v-icon>
           Зарегистрироваться
+        </v-btn>
+        <v-btn  class="ml-2" v-if="!$store.state.isLoggedIn" @click="goTo('/login')" icon>
+          <v-icon>mdi-login-variant</v-icon>
         </v-btn>
         <v-btn
           v-if="$store.state.isLoggedIn"
           outlined
-          class="ml-2"
-          @click="logout"
+          @click="goTo('/favorites')"
+          class="mr-2"
         >
-          Выйти
+          <v-icon left>mdi-star</v-icon>
+          Избранное
+        </v-btn>
+        <v-btn v-if="$store.state.isLoggedIn" outlined @click="goTo('/user')">
+          <v-icon left>mdi-account</v-icon>
+          Профиль
+        </v-btn>
+        <v-btn v-if="$store.state.isLoggedIn" class="ml-2" @click="logout" icon>
+          <v-icon>mdi-logout-variant</v-icon>
         </v-btn>
       </div>
     </v-app-bar>
+    <v-snackbar
+        v-model="snackbar"
+        timeout="3500"
+        color="green"
+    >
+      <v-icon left>mdi-check-circle-outline</v-icon>
+      <span class="text-subtitle-1">Вы успешно вышли из аккаунта!</span>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      snackbar: false,
+    };
+  },
   methods: {
     goTo(page) {
       this.$router.push(page);
@@ -41,6 +62,8 @@ export default {
     logout() {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setUser', null);
+      this.snackbar = true;
+      this.goTo('/');
     },
   },
 };

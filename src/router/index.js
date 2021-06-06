@@ -7,6 +7,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import ViewChannel from '../components/ViewChannel';
 import AddStream from '../components/AddStream';
+import UserProfile from '../components/UserProfile';
 Vue.use(Router);
 
 export default new Router({
@@ -47,6 +48,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register,
+    },
+    {
+      path: '/user',
+      name: 'userprofile',
+      component: UserProfile,
     },
   ],
 });
