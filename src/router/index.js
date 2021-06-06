@@ -9,6 +9,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import ViewChannel from '../components/ViewChannel';
 import UserProfile from '../components/UserProfile';
+import ViewProgram from '../components/ViewProgram';
 Vue.use(Router);
 
 export default new Router({
@@ -63,6 +64,11 @@ export default new Router({
       path: '/addstream',
       name: 'addstream',
       component: AddStream,
+    },
+    {
+      path: '/viewprogram',
+      name: 'viewprogram',
+      component: ViewProgram,
     },
   ],
 });
