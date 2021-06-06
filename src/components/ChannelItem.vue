@@ -20,9 +20,11 @@
           color="#7A6054"
           class="mr-2 mb-2"
           @click="likeChannel"
+         
+
           v-if="$store.state.isLoggedIn"
         >
-          <v-icon>mdi-star-outline</v-icon>
+          <v-icon >mdi-star-outline</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -44,6 +46,9 @@ export default {
     },
   },
   methods: {
+
+
+
     likeChannel() {
       this.$emit('likeChannel', this.channelData);
     },
@@ -54,4 +59,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+    .yellow-bg{
+      background-color: #ddd45c;
+    }
+</style>

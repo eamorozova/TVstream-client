@@ -1,7 +1,9 @@
 <template>
   <div>
+    
     <div v-if="$store.state.isLoggedIn">
       <v-container>
+        <h1 class="mb-8 mt-4">Избранные каналы</h1>
         <v-row>
           <v-col
             v-for="favorite in favorites"
@@ -31,6 +33,7 @@
           </v-col>
         </v-row>
       </v-container>
+      
     </div>
   </div>
 </template>
