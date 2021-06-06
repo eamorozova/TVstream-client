@@ -10,7 +10,11 @@
         {{ programData.title }}
         <br />
         <div>
-          <v-chip :color="restrictionColor(programData.ageLimit)" outlined small>
+          <v-chip
+            :color="restrictionColor(programData.ageLimit)"
+            outlined
+            small
+          >
             {{ programData.ageLimit + '+' }}
           </v-chip>
           <v-chip outlined small class="ml-2" color="black">

@@ -15,7 +15,12 @@
           <v-icon left>mdi-account-plus-outline</v-icon>
           Зарегистрироваться
         </v-btn>
-        <v-btn  class="ml-2" v-if="!$store.state.isLoggedIn" @click="goTo('/login')" icon>
+        <v-btn
+          class="ml-2"
+          v-if="!$store.state.isLoggedIn"
+          @click="goTo('/login')"
+          icon
+        >
           <v-icon>mdi-login-variant</v-icon>
         </v-btn>
         <v-btn
@@ -36,11 +41,7 @@
         </v-btn>
       </div>
     </v-app-bar>
-    <v-snackbar
-        v-model="snackbar"
-        timeout="3500"
-        color="green"
-    >
+    <v-snackbar v-model="snackbar" timeout="3500" color="green">
       <v-icon left>mdi-check-circle-outline</v-icon>
       <span class="text-subtitle-1">Вы успешно вышли из аккаунта!</span>
     </v-snackbar>

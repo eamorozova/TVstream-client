@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import ChannelsService from "@/services/ChannelsService";
+import ChannelsService from '../services/ChannelsService';
 
 const today = new Date();
 const tomorrow = new Date(today);

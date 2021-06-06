@@ -1,10 +1,6 @@
 <template>
   <div class="login">
-    <v-card
-      class="mx-auto mt-16"
-      max-width="450px"
-      elevation="6"
-    >
+    <v-card class="mx-auto mt-16" max-width="450px" elevation="6">
       <v-card-title>Вход</v-card-title>
       <v-card-subtitle
         >в сервис просмотра расписания ТВ-передач</v-card-subtitle

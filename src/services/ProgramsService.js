@@ -4,7 +4,10 @@ export default {
   getPrograms(channelId) {
     return Api().get(`programs/?channelId=${channelId}`);
   },
-  getProgram(channelId, programId) {
-    return Api().get(`programs/?channelId=${channelId}&programId=${programId}`);
+  get() {
+    return Api().get('programs');
+  },
+  post(program) {
+    return Api().post('programs', program);
   },
 };

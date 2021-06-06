@@ -68,7 +68,12 @@
                 >
                   сохранить
                 </v-btn>
-                <v-btn class="mr-n3" outlined color="blue-grey darken-1" @click="cancel">
+                <v-btn
+                  class="mr-n3"
+                  outlined
+                  color="blue-grey darken-1"
+                  @click="cancel"
+                >
                   отмена
                 </v-btn>
               </v-card-actions>
