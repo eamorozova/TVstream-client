@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import FavoriteService from '../services/FavoriteService';
-
 export default {
   name: 'FavoriteItem',
   props: {
@@ -37,21 +35,16 @@ export default {
   },
   methods: {
     deleteFavorite() {
-     
-      FavoriteService.delete(this.favoriteData.id);
+      this.$emit('deleteFavorite', this.favoriteData.id);
     },
     viewChannel(id) {
-
-      console.log(String(id))
       this.$router.push('/channels/' + String(id));
     },
-
   },
   mounted() {
     console.log(this.favoriteData.Channel);
-
   },
 };
 </script>
 
-<style></style>
+<style scoped />

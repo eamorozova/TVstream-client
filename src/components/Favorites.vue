@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div v-if="$store.state.isLoggedIn">
       <v-container>
         <h1 class="mb-8 mt-4">Избранные каналы</h1>
@@ -10,7 +9,11 @@
             :key="favorite.id"
             class="col-sm-12 col-md-6 col-lg-4 col-xl-3"
           >
-            <favorite :favorite-data="favorite"> </favorite>
+            <favorite
+              :favorite-data="favorite"
+              @deleteFavorite="deleteFavorite"
+            >
+            </favorite>
           </v-col>
         </v-row>
       </v-container>
@@ -25,7 +28,7 @@
                 <v-icon left color="white">mdi-alert</v-icon>
                 Список избранных телеканалов недоступен
               </v-card-title>
-              <v-card-subtitle class="white--text ">
+              <v-card-subtitle class="white--text">
                 Зарегистрируйтесь или войдите в свой аккаунт для получения
                 возможности добавления телеканалов и передач в список Избранных
               </v-card-subtitle>
@@ -33,7 +36,6 @@
           </v-col>
         </v-row>
       </v-container>
-      
     </div>
   </div>
 </template>
@@ -63,7 +65,7 @@ export default {
   },
   methods: {
     async deleteFavorite(index) {
-      FavoriteService.delete(index);
+      await FavoriteService.delete(index);
       this.favorites = (await FavoriteService.get()).data;
     },
   },

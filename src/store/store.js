@@ -13,6 +13,7 @@ export default new Vuex.Store({
     token: null,
     user: null,
     isLoggedIn: false,
+    isAdmin: false,
   },
   mutations: {
     setToken(state, token) {
@@ -21,6 +22,11 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user = user;
+      if (user === null) {
+        state.isAdmin = false;
+      } else {
+        state.isAdmin = user.email === 'admin@admin.admin';
+      }
     },
   },
   actions: {

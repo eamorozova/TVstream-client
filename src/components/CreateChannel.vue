@@ -44,14 +44,16 @@
           @click="create"
           right
           elevation="2"
-          :disabled="
-            !(this.channel.title !== null && this.channel.title.length > 0)
-          "
+          :disabled="!formIsValid"
         >
           Создать
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-snackbar v-model="snackbar" timeout="3500" color="red">
+      <v-icon left>mdi-alert</v-icon>
+      <span class="text-subtitle-1">{{ error }}</span>
+    </v-snackbar>
   </div>
 </template>
 
@@ -65,18 +67,25 @@ export default {
   data() {
     return {
       channel: {
-        title: null,
-        description: null,
-        image: null,
+        title: '',
+        description: '',
+        image: '',
       },
       error: null,
+      snackbar: false,
       titleRules: title => {
         return (
+          title.length === 0 ||
           titlePattern.test(title) ||
-          'Только буквы, цифры и пробелы, от двух до тридцати двух символов'
+          'Только буквы, цифры и пробелы, от двух до шестнадцати символов'
         );
       },
     };
+  },
+  computed: {
+    formIsValid() {
+      return titlePattern.test(this.channel.title);
+    },
   },
   methods: {
     addRandomImage() {
@@ -92,7 +101,8 @@ export default {
         await ChannelsService.post(this.channel);
         await this.$router.push('/');
       } catch (err) {
-        console.log(err);
+        this.error = err.response.data.error;
+        this.snackbar = true;
       }
     },
   },

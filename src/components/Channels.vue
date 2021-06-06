@@ -1,15 +1,21 @@
 <template>
   <div class="channel-list">
-    <router-link :to="{ name: 'createChannel' }">
-      <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2">
-        Добавить канал
-      </v-btn>
-    </router-link>
-    <router-link :to="{ name: 'createProgram' }">
-      <v-btn rounded color="#7A6054" class="white--text mt-3 ml-2">
-        Добавить передачу
-      </v-btn>
-    </router-link>
+    <v-btn
+      rounded
+      v-if="$store.state.isAdmin"
+      color="#7A6054"
+      class="white--text mt-3 ml-2"
+      @click="goTo('/create-channel')"
+    >
+      Добавить канал
+    </v-btn>
+    <v-btn
+      rounded
+      color="#7A6054"
+      class="white--text mt-3 ml-2"
+      @click="goTo('/create-program')"
+      >Добавить передачу</v-btn
+    >
     <v-divider class="mt-3 mx-2"></v-divider>
     <v-container>
       <v-row>
@@ -39,6 +45,9 @@ export default {
   name: 'Channels',
   components: { Channel },
   methods: {
+    goTo(page) {
+      this.$router.push(page);
+    },
     likeChannel(data) {
       FavoriteService.post({ channelId: data.id });
     },

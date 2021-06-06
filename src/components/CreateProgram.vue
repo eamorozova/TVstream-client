@@ -12,24 +12,27 @@
           type="text"
           label="название"
           v-model="program.title"
-          color="#7A6054"
+          color="#7a6054"
           counter
-          maxlength="16"
+          maxlength="32"
           :rules="[titleRules]"
         />
         <v-text-field
           type="text"
           label="категория"
           v-model="program.category"
-          color="#7A6054"
-          :rules="[titleRules]"
+          color="#7a6054"
+          counter
+          maxlength="32"
+          :rules="[categoryRules]"
         />
         <v-text-field
           type="text"
           label="возрастное ограничение"
           v-model="program.ageLimit"
-          color="#7A6054"
-          :rules="[titleRules]"
+          color="#7a6054"
+          maxlength="2"
+          :rules="[ageLimitRules]"
         />
         <v-textarea
           label="описание"
@@ -50,35 +53,64 @@
           @click="create"
           right
           elevation="2"
-          :disabled="
-            !(this.program.title !== null && this.program.title.length > 0)
-          "
+          :disabled="!formIsValid"
         >
           Создать
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-snackbar v-model="snackbar" timeout="3500" color="red">
+      <v-icon left>mdi-alert</v-icon>
+      <span class="text-subtitle-1">{{ error }}</span>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 import ProgramsService from '../services/ProgramsService';
 
-let titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,15}$/;
+const titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,31}$/;
+const categoryPattern = /^[а-яА-яёЁa-zA-Z][а-яА-ЯёЁa-zA-Z ]{1,31}$/;
+const ageLimitPattern = /^[0-9]{1,2}$/;
 
 export default {
   name: 'CreateProgram',
+  computed: {
+    formIsValid() {
+      return (
+        titlePattern.test(this.program.title) &&
+        categoryPattern.test(this.program.category) &&
+        ageLimitPattern.test(this.program.ageLimit)
+      );
+    },
+  },
   data() {
     return {
       program: {
-        title: null,
-        description: null,
-        category: null,
-        ageLimit: null,
+        title: '',
+        category: '',
+        ageLimit: '',
+        description: '',
       },
       error: null,
+      snackbar: false,
+      ageLimitRules: ageLimit => {
+        return (
+          ageLimit.length === 0 ||
+          ageLimitPattern.test(ageLimit) ||
+          'Только цифры'
+        );
+      },
+      categoryRules: category => {
+        return (
+          category.length === 0 ||
+          categoryPattern.test(category) ||
+          'Только буквы кириллицы и латинского алфавита от двух до тридцати двух символов'
+        );
+      },
       titleRules: title => {
         return (
+          title.length === 0 ||
           titlePattern.test(title) ||
           'Только буквы, цифры и пробелы, от двух до тридцати двух символов'
         );
@@ -91,7 +123,8 @@ export default {
         await ProgramsService.post(this.program);
         await this.$router.push('/');
       } catch (err) {
-        console.log(err);
+        this.error = err.response.data.error;
+        this.snackbar = true;
       }
     },
   },
