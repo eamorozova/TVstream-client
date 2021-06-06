@@ -93,8 +93,8 @@
 
 <script>
 import ChannelsService from '../services/ChannelsService';
-import ProgramsService from '../services/ProgramsService';
 import Program from './ProgramItem';
+import StreamsService from '../services/StreamsService';
 
 let titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,15}$/;
 
@@ -129,7 +129,8 @@ export default {
     try {
       const channelId = this.$store.state.route.params.channelId;
       this.channel = (await ChannelsService.getChannel(channelId)).data;
-      this.programs = (await ProgramsService.getPrograms(channelId)).data;
+      this.programs = (await StreamsService.getPrograms(channelId)).data;
+      console.log(this.programs);
       console.log(this.programs);
     } catch (err) {
       console.log(err);

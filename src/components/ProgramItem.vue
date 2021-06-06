@@ -4,21 +4,21 @@
       <v-col cols="2" align="right">
         <span class="text-h6">09.41 AM</span>
         <br />
-        23 января
+        {{ programData.time }}
       </v-col>
       <v-col cols="10" class="font-weight-bold text-h6">
-        {{ programData.title }}
+        {{ programData.Program.title }}
         <br />
         <div>
           <v-chip
-            :color="restrictionColor(programData.ageLimit)"
+            :color="restrictionColor(programData.Program.ageLimit)"
             outlined
             small
           >
-            {{ programData.ageLimit + '+' }}
+            {{ programData.Program.ageLimit + '+' }}
           </v-chip>
           <v-chip outlined small class="ml-2" color="black">
-            {{ programData.category }}
+            {{ programData.Program.category }}
           </v-chip>
         </div>
       </v-col>
