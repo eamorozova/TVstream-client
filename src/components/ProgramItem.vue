@@ -11,7 +11,7 @@
       <v-col
         cols="9"
         class="font-weight-bold text-h6"
-        @click="$router.push('/viewprogram')"
+        @click="$router.push('/programs/' + programData.Program.id)"
       >
         {{ programData.Program.title }}
         <br />
@@ -52,7 +52,7 @@ export default {
   }),
   methods: {
     likeProgram() {
-      this.$emit('likeProgram', this.programData);
+      this.$emit('likeProgram', this.programData.Program.id);
     },
     restrictionColor(age) {
       if (age >= 18) return 'red';

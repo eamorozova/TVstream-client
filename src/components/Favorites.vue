@@ -18,24 +18,72 @@
         <v-tabs-items v-model="tabs">
           <v-tab-item class="mt-4">
             <v-container>
-              <v-row v-for="favorite in favorites"
-                     :key="favorite.id"
+              <v-row v-for="channel in channels"
+                     :key="channel.id"
               dense>
                 <v-col cols="3"/>
                 <v-col
                   cols="6"
                 >
                   <favorite
-                    :favorite-data="favorite"
+                    :favorite-data="channel"
                     @deleteFavorite="deleteFavorite"
-                  >
-                  </favorite>
+                  />
                 </v-col>
               </v-row>
             </v-container>
           </v-tab-item>
-          <v-tab-item>
-
+          <v-tab-item class="mt-4">
+            <v-container>
+              <v-row v-for="program in programs"
+                     :key="program.id"
+                     dense>
+                <v-col cols="3"/>
+                <v-col
+                    cols="6"
+                >
+                  <v-card>
+                    <v-card-title>
+                      {{ program.Program.title }}
+                    </v-card-title>
+                    <v-card-subtitle>
+                      <v-chip
+                          :color="restrictionColor(program.Program.ageLimit)"
+                          outlined
+                          small
+                      >
+                        {{ program.Program.ageLimit + '+' }}
+                      </v-chip>
+                      <v-chip outlined small class="ml-2" color="black">
+                        {{ program.Program.category }}
+                      </v-chip>
+                    </v-card-subtitle>
+                    <v-card-actions>
+                      <v-btn
+                            color="blue-grey darken-1"
+                            rounded
+                            small
+                            class="ml-2 mb-2"
+                            @click="$router.push('/programs/' + program.ProgramId)"
+                      outlined>
+                        Страница программмы
+                      </v-btn>
+                      <v-spacer />
+                      <v-btn
+                        color="red"
+                        icon
+                        small
+                        class="mb-2 mr-2"
+                        outlined
+                        @click="deleteFavoriteProgram(program.id)"
+                      >
+                        <v-icon small>mdi-star-off-outline</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-tab-item>
         </v-tabs-items>
       </v-sheet>
@@ -71,25 +119,30 @@ export default {
   components: { Favorite },
   data() {
     return {
-      favorites: null,
+      channels: null,
+      programs: null,
       tabs: null,
     };
   },
-  props: {
-    favoritesData: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
-  },
   async mounted() {
-    this.favorites = (await FavoriteService.getChannels()).data;
+    this.channels = (await FavoriteService.getChannels()).data;
+    this.programs = (await FavoriteService.getPrograms()).data;
   },
   methods: {
     async deleteFavorite(index) {
       await FavoriteService.deleteChannel(index);
-      this.favorites = (await FavoriteService.getChannels()).data;
+      this.channels = (await FavoriteService.getChannels()).data;
+    },
+    async deleteFavoriteProgram(id) {
+      await FavoriteService.deleteProgram(id);
+      this.programs = (await FavoriteService.getPrograms()).data;
+    },
+    restrictionColor(age) {
+      if (age >= 18) return 'red';
+      if (age >= 16) return 'amber';
+      if (age >= 12) return 'green';
+      if (age >= 6) return 'blue';
+      return 'black';
     },
   },
 };

@@ -93,6 +93,10 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar v-model="snackbar" timeout="3500" color="green">
+      <v-icon left>mdi-check-circle-outline</v-icon>
+      <span class="text-subtitle-1">Программа уже была добавлена в избранное</span>
+    </v-snackbar>
   </div>
 </template>
 
@@ -100,6 +104,7 @@
 import ChannelsService from '../services/ChannelsService';
 import Program from './ProgramItem';
 import StreamsService from '../services/StreamsService';
+import FavoriteService from '../services/FavoriteService';
 
 let titlePattern = /^[а-яА-ЯёЁa-zA-Z0-9][а-яА-ЯёЁa-zA-Z0-9 ]{1,15}$/;
 
@@ -111,6 +116,7 @@ export default {
       channel: {},
       error: null,
       editing: false,
+      snackbar: false,
       storeTitle: '',
       storeDescription: '',
       storeImage: '',
@@ -181,9 +187,13 @@ export default {
       this.channel.image = this.storeImage;
       this.editing = false;
     },
-    likeProgram() {
-
-    }
+    async likeProgram(data) {
+      try {
+        await FavoriteService.postProgram({ programId: data });
+      } catch (err) {
+        this.snackbar = true;
+      }
+    },
   },
 };
 </script>

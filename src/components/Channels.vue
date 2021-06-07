@@ -8,15 +8,23 @@
           class="white--text mt-3 ml-2"
           @click="goTo('/create-channel')"
       >
-        Добавить канал
+        Создать канал
       </v-btn>
       <v-btn
           rounded
           color="#7A6054"
           class="white--text mt-3 ml-2"
           @click="goTo('/create-program')"
-      >Добавить передачу</v-btn
+      >Создать передачу</v-btn
       >
+      <v-btn
+        rounded
+        color="#7a6054"
+        class="white--text mt-3 ml-2"
+        @click="goTo('/add-stream')"
+      >
+        Добавить трансляцию
+      </v-btn>
       <v-divider class="mt-3 mx-2"></v-divider>
     </div>
     <v-container>

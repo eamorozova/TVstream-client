@@ -10,7 +10,7 @@ export default {
   deleteChannel(favoriteId) {
     return Api().delete(`favorites/channels/${favoriteId}`);
   },
-  getProgram() {
+  getPrograms() {
     return Api().get('favorites/programs');
   },
   postProgram(favorite) {

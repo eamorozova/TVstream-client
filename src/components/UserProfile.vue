@@ -37,6 +37,7 @@
                   type="email"
                   v-model="email"
                   :rules="[emailRules]"
+                  v-if="!$store.state.isAdmin"
                 />
                 <v-text-field
                   color="#7A6054"
@@ -154,9 +155,6 @@ export default {
     async save() {
       this.user.name = this.name;
       this.user.email = this.email;
-
-      /* РАБОТАЕТ ТОЛЬКО ЕСЛИ ЧЕЛОВЕК НЕ МЕНЯЕТ ПАРОЛЬ */
-
       if (this.password.length === 0) {
         await AuthenticationService.editInfo(this.user);
       } else {
@@ -165,9 +163,6 @@ export default {
         this.newPasswordUser.password = this.password;
         await AuthenticationService.editInfo(this.newPasswordUser);
       }
-
-      /* РАБОТАЕТ ТОЛЬКО ЕСЛИ ЧЕЛОВЕК НЕ МЕНЯЕТ ПАРОЛЬ */
-
       this.editing = false;
     },
     beginEditing() {
