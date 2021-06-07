@@ -89,20 +89,43 @@
 
 <script>
 import ChannelsService from '../services/ChannelsService';
+import StreamsService from '../services/StreamsService';
+import ProgramsService from '../services/ProgramsService';
 
 const today = new Date();
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 export default {
   data: () => ({
+    stream: {
+      time: '',
+      ChannelId: '',
+      ProgramId: '',
+    },
     channels: [],
+    programs: [],
     currentDate: tomorrow.toISOString().substring(0, 10),
+    date: new Date().toISOString().substr(0, 10),
   }),
   async mounted() {
-    const response = (await ChannelsService.getChannels()).data;
-    response.forEach(channel => {
+    const channels = (await ChannelsService.get()).data;
+    channels.forEach(channel => {
       this.channels.push(channel.title);
     });
+    const programs = (await ProgramsService.get()).data;
+    programs.forEach(program => {
+      this.programs.push(program.title);
+    });
+  },
+  methods: {
+    async create() {
+      try {
+        await StreamsService.post(this.stream);
+        await this.$router.push('/');
+      } catch (err) {
+        this.error = err.response.data.error;
+      }
+    },
   },
 };
 </script>

@@ -1,13 +1,22 @@
 import Api from '../services/Api';
 
 export default {
-  get() {
-    return Api().get('favorites');
+  getChannels() {
+    return Api().get('favorites/channels');
   },
-  post(favorite) {
-    return Api().post('favorites', favorite);
+  postChannel(favorite) {
+    return Api().post('favorites/channels', favorite);
   },
-  delete(favoriteId) {
-    return Api().delete(`favorites/${favoriteId}`);
+  deleteChannel(favoriteId) {
+    return Api().delete(`favorites/channels/${favoriteId}`);
+  },
+  getProgram() {
+    return Api().get('favorites/programs');
+  },
+  postProgram(favorite) {
+    return Api().post('favorites/programs', favorite);
+  },
+  deleteProgram(favoriteId) {
+    return Api().delete(`favorites/programs/${favoriteId}`);
   },
 };

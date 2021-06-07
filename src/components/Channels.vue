@@ -30,6 +30,14 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar v-model="snackbar" timeout="3500" color="green">
+      <v-icon left>mdi-check-circle-outline</v-icon>
+      <span class="text-subtitle-1">Канал уже был добавлен в избранное</span>
+    </v-snackbar>
+    <v-snackbar v-model="success" timeout="3500" color="green">
+      <v-icon left>mdi-check-circle-outline</v-icon>
+      <span class="text-subtitle-1">Канал добавлен в избранное</span>
+    </v-snackbar>
   </div>
 </template>
 
@@ -42,6 +50,8 @@ export default {
   data() {
     return {
       channels: null,
+      snackbar: false,
+      success: false,
     };
   },
   name: 'Channels',
@@ -50,12 +60,18 @@ export default {
     goTo(page) {
       this.$router.push(page);
     },
-    likeChannel(data) {
-      FavoriteService.post({ channelId: data.id });
+    async likeChannel(data) {
+      try {
+        await FavoriteService.postChannel({ channelId: data.id });
+        this.success = true;
+      } catch (err) {
+        this.snackbar = true;
+        console.log(err);
+      }
     },
   },
   async mounted() {
-    this.channels = (await ChannelsService.getChannels()).data;
+    this.channels = (await ChannelsService.get()).data;
   },
 };
 </script>

@@ -84,12 +84,12 @@ export default {
     },
   },
   async mounted() {
-    this.favorites = (await FavoriteService.get()).data;
+    this.favorites = (await FavoriteService.getChannels()).data;
   },
   methods: {
     async deleteFavorite(index) {
-      await FavoriteService.delete(index);
-      this.favorites = (await FavoriteService.get()).data;
+      await FavoriteService.deleteChannel(index);
+      this.favorites = (await FavoriteService.getChannels()).data;
     },
   },
 };

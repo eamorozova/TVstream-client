@@ -7,7 +7,7 @@ export default {
   getChannel(id) {
     return Api().get(`channels/${id}`);
   },
-  getChannels() {
+  get() {
     return Api().get('channels');
   },
   post(channel) {

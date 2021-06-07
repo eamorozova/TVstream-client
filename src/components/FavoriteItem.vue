@@ -12,19 +12,19 @@
             <v-card-title>{{ favoriteData.Channel.title }}</v-card-title>
             <v-card-actions>
               <v-btn
-                  outlined
-                  color="blue-grey darkened-1"
-                  class="px-4 ml-2 mb-2"
-                  v-on:click="viewChannel(favoriteData.Channel.id)"
-              >Расписание</v-btn
+                outlined
+                color="blue-grey darkened-1"
+                class="px-4 ml-2 mb-2"
+                v-on:click="viewChannel(favoriteData.Channel.id)"
+                >Расписание</v-btn
               >
-              <v-spacer/>
+              <v-spacer />
               <v-btn
-                  color="red"
-                  icon
-                  @click="deleteFavorite"
-                  outlined
-                  class="mr-2 mb-2"
+                color="red"
+                icon
+                @click="deleteFavorite"
+                outlined
+                class="mr-2 mb-2"
               >
                 <v-icon> mdi-star-off-outline</v-icon>
               </v-btn>
