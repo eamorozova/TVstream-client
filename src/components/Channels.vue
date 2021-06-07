@@ -1,22 +1,24 @@
 <template>
   <div class="channel-list">
-    <v-btn
-      rounded
-      v-if="$store.state.isAdmin"
-      color="#7A6054"
-      class="white--text mt-3 ml-2"
-      @click="goTo('/create-channel')"
-    >
-      Добавить канал
-    </v-btn>
-    <v-btn
-      rounded
-      color="#7A6054"
-      class="white--text mt-3 ml-2"
-      @click="goTo('/create-program')"
+    <div v-if="$store.state.isAdmin">
+      <v-btn
+          rounded
+
+          color="#7A6054"
+          class="white--text mt-3 ml-2"
+          @click="goTo('/create-channel')"
+      >
+        Добавить канал
+      </v-btn>
+      <v-btn
+          rounded
+          color="#7A6054"
+          class="white--text mt-3 ml-2"
+          @click="goTo('/create-program')"
       >Добавить передачу</v-btn
-    >
-    <v-divider class="mt-3 mx-2"></v-divider>
+      >
+      <v-divider class="mt-3 mx-2"></v-divider>
+    </div>
     <v-container>
       <v-row>
         <v-col

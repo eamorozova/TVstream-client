@@ -15,7 +15,12 @@
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
-                <v-btn @click="beginEditing" outlined class="mb-1">
+                <v-btn
+                  @click="beginEditing"
+                  outlined
+                  class="mb-1"
+                  v-if="$store.state.isAdmin"
+                >
                   <v-icon left>mdi-circle-edit-outline</v-icon>
                   Редактировать
                 </v-btn>
@@ -78,10 +83,10 @@
                 </v-btn>
               </v-card-actions>
             </div>
+            <v-divider />
             <div class="px-3">
-              <v-divider />
               <v-container v-for="program in programs" :key="program.id">
-                <program :program-data="program"> </program>
+                <program :program-data="program" @likeProgram="likeProgram"/>
               </v-container>
             </div>
           </v-card>
@@ -130,8 +135,6 @@ export default {
       const channelId = this.$store.state.route.params.channelId;
       this.channel = (await ChannelsService.getChannel(channelId)).data;
       this.programs = (await StreamsService.getPrograms(channelId)).data;
-      console.log(this.programs);
-      console.log(this.programs);
     } catch (err) {
       console.log(err);
     }
@@ -178,6 +181,9 @@ export default {
       this.channel.image = this.storeImage;
       this.editing = false;
     },
+    likeProgram() {
+
+    }
   },
 };
 </script>

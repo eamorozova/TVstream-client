@@ -1,23 +1,37 @@
 <template>
   <div>
     <v-card>
-      <v-img height="200px" :src="favoriteData.Channel.image" />
-      <v-card-title>{{ favoriteData.Channel.title }}</v-card-title>
-      <v-card-text>{{ favoriteData.Channel.description }} </v-card-text>
-      <v-card-actions>
-        <v-btn
-          rounded
-          outlined
-          color="blue-grey darkened-1"
-          class="px-4 ml-2 mb-2"
-          v-on:click="viewChannel(favoritelData.channel.id)"
-          >Расписание</v-btn
-        >
-        <v-spacer></v-spacer>
-        <v-btn icon color="red" @click="deleteFavorite">
-          <v-icon>mdi-star-off-outline</v-icon>
-        </v-btn>
-      </v-card-actions>
+      <v-container class="pa-0">
+        <v-row class="pa-0 ma-0">
+          <v-col class="pa-0" cols="2">
+            <v-avatar size="87" class="ma-3" rounded>
+              <v-img :src="favoriteData.Channel.image" />
+            </v-avatar>
+          </v-col>
+          <v-col class="pa-0 mt-n2">
+            <v-card-title>{{ favoriteData.Channel.title }}</v-card-title>
+            <v-card-actions>
+              <v-btn
+                  outlined
+                  color="blue-grey darkened-1"
+                  class="px-4 ml-2 mb-2"
+                  v-on:click="viewChannel(favoriteData.Channel.id)"
+              >Расписание</v-btn
+              >
+              <v-spacer/>
+              <v-btn
+                  color="red"
+                  icon
+                  @click="deleteFavorite"
+                  outlined
+                  class="mr-2 mb-2"
+              >
+                <v-icon> mdi-star-off-outline</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card>
   </div>
 </template>
