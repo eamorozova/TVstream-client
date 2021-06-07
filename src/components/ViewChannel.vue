@@ -86,7 +86,7 @@
             <v-divider />
             <div class="px-3">
               <v-container v-for="program in programs" :key="program.id">
-                <program :program-data="program" @likeProgram="likeProgram"/>
+                <program :program-data="program" @likeProgram="likeProgram" @deleteStream="deleteStream"/>
               </v-container>
             </div>
           </v-card>
@@ -151,6 +151,15 @@ export default {
       try {
         await ChannelsService.delete(channelId);
         await this.$router.push('/');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteStream(id) {
+      await StreamsService.remove(id);
+      try {
+        const channelId = this.$store.state.route.params.channelId;
+        this.programs = (await StreamsService.getPrograms(channelId)).data;
       } catch (err) {
         console.log(err);
       }

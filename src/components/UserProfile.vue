@@ -97,7 +97,8 @@ const passwordPattern = /^[a-zA-Z0-9]{6,16}$/;
 export default {
   name: 'UserProfile',
   async mounted() {
-    this.user = (await AuthenticationService.getInfo()).data;
+    this.user.name = (await AuthenticationService.getInfo()).data.name;
+    this.user.email = (await AuthenticationService.getInfo()).data.email;
   },
   computed: {
     formIsValid() {
@@ -153,9 +154,9 @@ export default {
       await this.$router.push('/');
     },
     async save() {
-      this.user.name = this.name;
-      this.user.email = this.email;
       if (this.password.length === 0) {
+        this.user.name = this.name;
+        this.user.email = this.email;
         await AuthenticationService.editInfo(this.user);
       } else {
         this.newPasswordUser.name = this.user.name;

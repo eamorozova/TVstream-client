@@ -9,7 +9,7 @@
         }}</span>
       </v-col>
       <v-col
-        cols="9"
+        cols="8"
         class="font-weight-bold text-h6"
         @click="$router.push('/programs/' + programData.Program.id)"
       >
@@ -28,7 +28,7 @@
           </v-chip>
         </div>
       </v-col>
-      <v-col cols="1" class="align-content-stretch">
+      <v-col cols="2" class="align-content-stretch" align="right">
         <v-btn
           icon
           outlined
@@ -39,20 +39,34 @@
         >
           <v-icon>mdi-star-outline</v-icon>
         </v-btn>
+        <v-btn
+          icon
+          outlined
+          class="mt-3 ml-2"
+          color="red"
+          v-if="$store.state.isAdmin"
+          @click="deleteStream"
+        >
+          <v-icon>mdi-delete-outline</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'ProgramItem',
   data: () => ({
     show: false,
   }),
   methods: {
+    deleteStream() {
+      this.$emit('deleteStream', this.programData.id)
+    },
     likeProgram() {
-      this.$emit('likeProgram', this.programData.Program.id);
+      this.$emit('likeProgram', this.programData.ProgramId);
     },
     restrictionColor(age) {
       if (age >= 18) return 'red';

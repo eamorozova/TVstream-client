@@ -10,4 +10,7 @@ export default {
   post(stream) {
     return Api().post('streams', stream);
   },
+  remove(id) {
+    return Api().delete(`streams/${id}`);
+  },
 };
