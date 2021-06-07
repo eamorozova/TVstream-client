@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="2" />
         <v-col cols="8">
-          <v-card rounded outlined elevation="2">
+          <v-card rounded outlined elevation="2" class="mt-6">
             <div v-if="!editing">
               <v-img :src="channel.image" height="250px" />
               <v-card-title class="text-h4">
