@@ -33,6 +33,11 @@ export default new Router({
     },
     // телепередача
     {
+      path: '/programs/:programId',
+      name: 'viewprogram',
+      component: ViewProgram,
+    },
+    {
       path: '/create-program',
       name: 'createProgram',
       component: CreateProgram,
@@ -61,14 +66,9 @@ export default new Router({
       component: UserProfile,
     },
     {
-      path: '/addstream',
+      path: '/add-stream',
       name: 'addstream',
       component: AddStream,
-    },
-    {
-      path: '/viewprogram',
-      name: 'viewprogram',
-      component: ViewProgram,
     },
   ],
 });
