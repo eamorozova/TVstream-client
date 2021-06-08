@@ -46,7 +46,7 @@
         ></v-textarea>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           class="font-weight-bold mb-2 mr-1 white--text px-2"
           color="blue-grey darken-1"

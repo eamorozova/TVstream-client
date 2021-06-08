@@ -4,7 +4,7 @@
       <v-container class="pa-0">
         <v-row class="pa-0 ma-0">
           <v-col class="pa-0" cols="2">
-            <v-avatar size="87" class="ma-3" rounded>
+            <v-avatar size="60" class="ma-3" rounded>
               <v-img :src="favoriteData.Channel.image" />
             </v-avatar>
           </v-col>

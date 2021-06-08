@@ -2,20 +2,19 @@
   <div class="channel-list">
     <div v-if="$store.state.isAdmin">
       <v-btn
-          rounded
-
-          color="#7A6054"
-          class="white--text mt-3 ml-2"
-          @click="goTo('/create-channel')"
+        rounded
+        color="#7A6054"
+        class="white--text mt-3 ml-2"
+        @click="goTo('/create-channel')"
       >
         Создать канал
       </v-btn>
       <v-btn
-          rounded
-          color="#7A6054"
-          class="white--text mt-3 ml-2"
-          @click="goTo('/create-program')"
-      >Создать передачу</v-btn
+        rounded
+        color="#7A6054"
+        class="white--text mt-3 ml-2"
+        @click="goTo('/create-program')"
+        >Создать передачу</v-btn
       >
       <v-btn
         rounded

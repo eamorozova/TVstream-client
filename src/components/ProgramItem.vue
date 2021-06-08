@@ -5,11 +5,11 @@
         <span class="text-h6">{{ programData.time.substring(11, 16) }}</span>
         <br />
         <span class="text-subtitle-1">{{
-          programData.time.substring(0, 10)
+          programData.time.substring(2, 10)
         }}</span>
       </v-col>
       <v-col
-        cols="8"
+        :cols="infoCols"
         class="font-weight-bold text-h6"
         @click="$router.push('/programs/' + programData.Program.id)"
       >
@@ -28,11 +28,11 @@
           </v-chip>
         </div>
       </v-col>
-      <v-col cols="2" class="align-content-stretch" align="right">
+      <v-col :cols="btnCols" align="right">
         <v-btn
           icon
           outlined
-          class="mt-3"
+          class="mt-3 mr-2"
           color="#7a6054"
           v-if="$store.state.isLoggedIn"
           @click="likeProgram"
@@ -42,7 +42,7 @@
         <v-btn
           icon
           outlined
-          class="mt-3 ml-2"
+          class="mt-3"
           color="red"
           v-if="$store.state.isAdmin"
           @click="deleteStream"
@@ -55,15 +55,16 @@
 </template>
 
 <script>
-
 export default {
   name: 'ProgramItem',
   data: () => ({
     show: false,
+    infoCols: 9,
+    btnCols: 1,
   }),
   methods: {
     deleteStream() {
-      this.$emit('deleteStream', this.programData.id)
+      this.$emit('deleteStream', this.programData.id);
     },
     likeProgram() {
       this.$emit('likeProgram', this.programData.ProgramId);
@@ -75,6 +76,14 @@ export default {
       if (age >= 6) return 'blue';
       return 'black';
     },
+  },
+  mounted() {
+    if (this.$store.state.isAdmin) {
+      this.infoCols = 7;
+      this.btnCols = 3;
+    } else if (!this.$store.state.isLoggedIn) {
+      this.infoCols = 10;
+    }
   },
   props: {
     programData: {

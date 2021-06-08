@@ -83,10 +83,14 @@
                 </v-btn>
               </v-card-actions>
             </div>
-            <v-divider />
+            <v-divider class="mx-2" />
             <div class="px-3">
               <v-container v-for="program in programs" :key="program.id">
-                <program :program-data="program" @likeProgram="likeProgram" @deleteStream="deleteStream"/>
+                <program
+                  :program-data="program"
+                  @likeProgram="likeProgram"
+                  @deleteStream="deleteStream"
+                />
               </v-container>
             </div>
           </v-card>
@@ -95,7 +99,9 @@
     </v-container>
     <v-snackbar v-model="snackbar" timeout="3500" color="green">
       <v-icon left>mdi-check-circle-outline</v-icon>
-      <span class="text-subtitle-1">Программа уже была добавлена в избранное</span>
+      <span class="text-subtitle-1"
+        >Программа уже была добавлена в избранное</span
+      >
     </v-snackbar>
   </div>
 </template>
