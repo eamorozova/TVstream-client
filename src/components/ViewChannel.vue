@@ -1,11 +1,16 @@
 <template>
   <div class="viewChannel">
     <v-container>
+      
       <v-row>
+        
         <v-col cols="2" />
         <v-col cols="8">
-          <v-card rounded outlined elevation="2" class="mt-6">
-            <div v-if="!editing">
+          <h1 class="empty-chanel" 
+            v-if="!channel">Такого канала нет</h1>
+          <v-card   v-if="channel" rounded outlined elevation="2" class="mt-6">
+            
+            <div v-if="!editing" text>
               <v-img :src="channel.image" height="250px" />
               <v-card-title class="text-h4">
                 {{ channel.title }}
@@ -213,4 +218,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .empty-chanel{
+    width: 300px;
+    margin: auto;
+    padding-top: 90px;
+  }
+</style>
