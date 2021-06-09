@@ -117,11 +117,11 @@
                   :min="new Date().toISOString().substring(0, 10)"
                 ></v-date-picker>
               </v-menu>
-              <v-btn outlined color="blue-grey darken-4">
-                Показть
+              <v-btn outlined color="blue-grey darken-4" :disabled="!date" @click="selectDate">
+                <v-icon left>mdi-magnify</v-icon>
+                Показать
               </v-btn>
             </div>
-
             <div class="px-3">
               <v-container v-for="program in programs" :key="program.id">
                 <program
@@ -158,6 +158,7 @@ export default {
     return {
       programs: null,
       channel: {},
+      date: '',
       error: null,
       editing: false,
       snackbar: false,
@@ -222,6 +223,15 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async selectDate() {
+      const channelId = this.$store.state.route.params.channelId;
+      console.log(channelId);
+      const time = this.date + 'T00:00:00.000Z';
+      console.log(time);
+      this.programs = (
+        await StreamsService.getProgramsForDate(channelId, time)
+      ).data;
     },
     addRandomImage() {
       let imageSeed = Math.floor(Math.random() * 9999);

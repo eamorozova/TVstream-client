@@ -139,8 +139,8 @@
                       </v-btn>
                     </v-col>
                   </v-row>
-                </v-container> </v-card-text
-              >`
+                </v-container>
+              </v-card-text>
             </div>
           </v-card>
         </v-col>
