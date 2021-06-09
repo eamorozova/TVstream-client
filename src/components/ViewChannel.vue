@@ -1,24 +1,20 @@
 <template>
   <div class="viewChannel">
     <v-container>
-      
       <v-row>
-        
         <v-col cols="2" />
         <v-col cols="8">
-          <h1 class="empty-chanel" 
-            v-if="!channel">Такого канала нет</h1>
-          <v-card   v-if="channel" rounded outlined elevation="2" class="mt-6">
+          <h1 class="empty-chanel" v-if="!channel">Такого канала нет</h1>
+          <v-card v-if="channel" rounded outlined elevation="2" class="mt-6">
             <div v-if="!editing" text>
               <v-img :src="channel.image" height="250px" />
               <v-card-title class="text-h4">
                 {{ channel.title }}
               </v-card-title>
- 
+
               <v-card-subtitle>
                 {{ channel.description }}
               </v-card-subtitle>
-
 
               <v-card-actions>
                 <v-spacer />
@@ -92,37 +88,39 @@
             </div>
             <v-divider class="mx-2" />
 
-
-          <div class="streamController">
-            <v-menu 
-          class="mx-2"
-          v-model="menu2"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          transition="scale-transition"
-          offset-y
-          min-width="auto"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              class="mx-12 mt-4"
-              v-model="date"
-              label="Выберите дату"
-              prepend-icon="mdi-calendar"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="date"
-            @input="menu2 = false"
-          ></v-date-picker>
-        </v-menu>
-        <v-btn>
-          Показть
-        </v-btn>
-        </div>
+            <div class="streamController">
+              <v-menu
+                class="mx-2"
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    class="mx-12 mt-4"
+                    v-model="date"
+                    label="Выберите дату"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                    color="#7a6054"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="date"
+                  @input="menu2 = false"
+                  color="#7a6054"
+                  :min="new Date().toISOString().substring(0, 10)"
+                ></v-date-picker>
+              </v-menu>
+              <v-btn outlined color="blue-grey darken-4">
+                Показть
+              </v-btn>
+            </div>
 
             <div class="px-3">
               <v-container v-for="program in programs" :key="program.id">
@@ -254,15 +252,15 @@ export default {
 </script>
 
 <style scoped>
-  .empty-chanel{
-    width: 300px;
-    margin: auto;
-    padding-top: 90px;
-  }
+.empty-chanel {
+  width: 300px;
+  margin: auto;
+  padding-top: 90px;
+}
 
-  .streamController{
-    display: flex;
-    align-items: center;
-    padding-right: 40px;
-  }
+.streamController {
+  display: flex;
+  align-items: center;
+  padding-right: 40px;
+}
 </style>

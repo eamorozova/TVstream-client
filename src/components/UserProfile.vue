@@ -57,6 +57,7 @@
                   color="#ff0000"
                   class="white--text ml-2 mb-2 pr-4"
                   @click="deleteUser"
+                  v-if="!$store.state.isAdmin"
                 >
                   <v-icon left>mdi-delete</v-icon>
                   удалить аккаунт
