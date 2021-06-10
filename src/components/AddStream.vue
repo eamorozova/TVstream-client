@@ -86,6 +86,12 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-snackbar v-model="snackbar" timeout="3500" color="red">
+      <v-icon left>mdi-alert</v-icon>
+      <span class="text-subtitle-1"
+        >В это время уже запланирована трансляция!</span
+      >
+    </v-snackbar>
   </div>
 </template>
 
@@ -123,6 +129,7 @@ export default {
       channelId: '',
       programId: '',
     },
+    snackbar: false,
   }),
   async mounted() {
     this.channels = (await ChannelsService.get()).data;
@@ -154,6 +161,7 @@ export default {
         await this.$router.push('/');
       } catch (err) {
         this.error = err.response.data.error;
+        this.snackbar = true;
       }
     },
   },
